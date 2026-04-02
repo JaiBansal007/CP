@@ -1,6 +1,6 @@
 /*
 *    Author:Jx07
-*    Created:Saturday, 28.03.2026 10:02 AM (GMT+5:30)
+*    Created:Thursday, 02.04.2026 03:33 AM (GMT+5:30)
 */
 #include<bits/stdc++.h>
 
@@ -15,8 +15,8 @@ mt19937_64 RNG(chrono::steady_clock::now().time_since_epoch().count());
 #define int long long 
 #define all(v) v.begin(), v.end()
 
-#define peace
-const int tt=1;
+#define PEACE
+#define MULTI_TEST
 int MOD=1e9+7;//998244353;
 
 void solve(int tc){
@@ -43,7 +43,7 @@ void solve(int tc){
 
 
 signed main() {
-    #if defined(JAI) && defined(peace)
+    #if defined(JAI) && defined(PEACE)
         freopen("input.txt", "r", stdin);  
         freopen("output.txt", "w", stdout); 
         clock_t T = clock();
@@ -54,13 +54,15 @@ signed main() {
     cout.tie(NULL);
     
     int t=1;
-    if(tt)cin>>t;
+    #ifdef MULTI_TEST
+        cin >> t;
+    #endif
     
     for(int i=1;i<=t;i++){
         solve(i);
     }
 
-    #if defined(JAI) && defined(peace)
+    #if defined(JAI) && defined(PEACE)
         cout << "\nTime : " << ((float)(clock() - T)*1000) / CLOCKS_PER_SEC << " ms";
     #endif
 

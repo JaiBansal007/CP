@@ -7,12 +7,15 @@
   - profile badiya lagti
   - 75 hard
 
-
 => grind atcoder ABC or ARC they both are so good
   - New Techniques
+  - under-rated
 
 => Educational rounds for new techniques
 
 => Upsolve
-
+  - very under-rated
+  - intersting
+  - build confidence
+  - Upsolve>>>rating_grind
 

@@ -1,57 +1,71 @@
+
 #include <bits/stdc++.h>
+using namespace std;
 
-using i64 = long long;
+mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-int main() {
-    std::ios::sync_with_stdio(false);
-    std::cin.tie(nullptr);
-    
-    int n, m;
-    std::cin >> n >> m;
-    
-    std::vector<std::vector<std::pair<int, int>>> adj(n);
-    for (int i = 0; i < m; i++) {
-        int u, v, w;
-        std::cin >> u >> v >> w;
-        u--, v--;
-        adj[u].emplace_back(v, w);
-        adj[v].emplace_back(u, w);
-    }
-    
-    std::priority_queue<std::pair<i64, int>, std::vector<std::pair<i64, int>>, std::greater<>> q;
-    q.emplace(0, 0);
-    
-    std::vector<i64> dis(n, -1);
-    std::vector<int> a;
-    while (!q.empty()) {
-        auto [d, x] = q.top();
-        q.pop();
-        
-        if (dis[x] != -1) {
-            continue;
-        }
-        dis[x] = d;
-        a.push_back(x);
-        if (x == n - 1) {
-            break;
-        }
-        for (auto [y, w] : adj[x]) {
-            q.emplace(d + w, y);
-        }
-    }
-    
-    if (dis[n - 1] == -1) {
-        std::cout << "inf\n";
-        return 0;
-    }
-    std::cout << dis[n - 1] << " " << a.size() - 1 << "\n";
-    for (int i = 1; i < a.size(); i++) {
-        std::string s(n, '0');
-        for (int j = 0; j < i; j++) {
-            s[a[j]] = '1';
-        }
-        std::cout << s << " " << dis[a[i]] - dis[a[i - 1]] << "\n";
-    }
-    
-    return 0;
+int get(int l, int r){
+    return uniform_int_distribution<int>(l, r)(rng);
 }
+
+char getChar(){
+    return 'a' + get(0, 2); // small alphabet → more collisions
+}
+
+string randomString(int n){
+    string s;
+    for(int i = 0; i < n; i++){
+        s += getChar();
+    }
+    return s;
+}
+
+string periodicString(int n){
+    int len = get(1, min(5, n));
+    string base;
+    for(int i = 0; i < len; i++) base += getChar();
+
+    string s;
+    for(int i = 0; i < n; i++){
+        s += base[i % len];
+    }
+    return s;
+}
+
+string allSame(int n){
+    char c = getChar();
+    return string(n, c);
+}
+
+string almostSame(int n){
+    string s = string(n, 'a');
+    for(int i = 0; i < n/5; i++){
+        s[get(0, n-1)] = getChar();
+    }
+    return s;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t = 1; // number of tests
+    cout << t << "\n";
+
+    while(t--){
+        int n = get(1, 50); // small for brute testing
+        int k = get(1, n);
+
+        int type = get(1, 4);
+        string s;
+
+        if(type == 1) s = randomString(n);
+        else if(type == 2) s = periodicString(n);
+        else if(type == 3) s = allSame(n);
+        else s = almostSame(n);
+
+        cout << n << " " << k << " " << k << "\n";
+        cout << s << "\n";
+    }
+}
+
