@@ -1,0 +1,39 @@
+class TrieNode{
+
+public:
+	bool stop;
+	TrieNode *child[26];
+	TrieNode(){
+		stop=false;
+		for(auto &a:child) a=nullptr;
+	}
+};
+
+class Trie{
+private:
+	TrieNode *root;
+public:
+
+	Trie(){
+		root=new TrieNode();	
+	}
+	void insert(const string &s){
+		TrieNode *p=root;
+		for(auto &x:s){
+			int i=x-'a';//if contain only small alphabets
+			if(!p->child[i])p->child[i]=new TrieNode();
+			p=p->child[i];
+		}	
+		p->stop=true;
+	}
+	void check(const string &s){
+		TrieNode *p=root;
+		for(auto &x:s){
+			int i=x-'a';
+			if(!p->child[i])return false;
+			p=p->child[i];	
+		}
+		return p->stop;
+	}
+
+}
