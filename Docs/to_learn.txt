@@ -1,6 +1,0 @@
-1. Lucas theorem  
-2. Articulation Point
-3. Eular Tour
-4. Strings algorithms 
-5. Square root decomposition
-6. Max flow(https://atcoder.jp/contests/abc445/tasks/abc445_g)
